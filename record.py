@@ -9,18 +9,17 @@ now = datetime.now()
 filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H:%M:%S'))
 
 camera.resolution = (640, 360)
-camera.framerate = 15
+camera.framerate = 30
 
-#camera.start_preview()
-#sleep(2)
+while(1):
+    go = input("Start? (Y/n)\n")
+    if go == "n":
+        exit()
+    elif go == "Y" or go == "y" or go == "":
+        break
+    else:
+        print("Please enter \"y\", \"n\" or nothing")
 
-go = input("Press Enter to start")
-if go:
-    #camera.stop_preview()
-    exit()
-else:
-    camera.start_recording(filename)
-    #camera.stop_preview()
-
-    camera.wait_recording(20) #7500 -> 2:05:00
-    camera.stop_recording()
+camera.start_recording(filename)
+camera.wait_recording(7500) #7500 -> 2:05:00
+camera.stop_recording()
