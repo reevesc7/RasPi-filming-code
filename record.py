@@ -10,9 +10,10 @@ filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H:%M:%S'))
 
 camera.resolution = (640, 360)
 camera.framerate = 30
+camera.brightness = 100
 
 while(1):
-    go = input("Start? (Y/n)\n")
+    go = input("Start? (Y/n) ")
     if go == "n":
         exit()
     elif go == "Y" or go == "y" or go == "":
@@ -21,5 +22,6 @@ while(1):
         print("Please enter \"y\", \"n\" or nothing")
 
 camera.start_recording(filename)
+print("Recording Started!")
 camera.wait_recording(7500) #7500 -> 2:05:00
 camera.stop_recording()
