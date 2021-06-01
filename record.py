@@ -8,9 +8,9 @@ camera = PiCamera()
 now = datetime.now()
 filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H:%M:%S'))
 
-camera.resolution = (640, 360)
+camera.resolution = (648, 486)
 camera.framerate = 30
-camera.brightness = 100
+camera.brightness = 100 #Enter an integer 0-100
 
 while(1):
     go = input("Start? (Y/n) ")
