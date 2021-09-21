@@ -6,7 +6,7 @@ subject = input("Subject: ")
 
 camera = PiCamera()
 now = datetime.now()
-filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H:%M:%S'))
+filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H-%M-%S'))
 
 camera.resolution = (640, 360)
 camera.framerate = 30
