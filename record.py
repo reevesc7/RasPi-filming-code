@@ -13,7 +13,7 @@ camera.framerate = 30
 
 while(1):
     go = input("Start? (Y/n)\n")
-    if go == "n":
+    if go == "n" or go == "N":
         exit()
     elif go == "Y" or go == "y" or go == "":
         break
