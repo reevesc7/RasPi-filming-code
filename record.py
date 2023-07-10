@@ -1,3 +1,6 @@
+record_time = 7500
+    #7500 seconds = 2:05:00
+
 from picamera import PiCamera
 from time import sleep
 from datetime import datetime
@@ -21,5 +24,5 @@ while(1):
         print("Please enter \"y\", \"n\" or nothing")
 
 camera.start_recording(filename)
-camera.wait_recording(7500) #7500 -> 2:05:00
+camera.wait_recording(record_time)
 camera.stop_recording()
