@@ -1,19 +1,33 @@
-record_time = 7500
-    #7500 seconds = 2:05:00
-
-from picamera import PiCamera
+from sys import argv
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+from picamera2.encoders import H264Encoder
+from picamera2 import Picamera2
 from time import sleep
 from datetime import datetime
+from os.path import expanduser
 
+#Argument parsing
+parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument("-t", "--time", default=7500, type=int, help="Duration (seconds) of recording")
+args = vars(parser.parse_args())
+
+#Set parameters
+record_time = args["time"]
+
+#Get subject ID
 subject = input("Subject: ")
 
-camera = PiCamera()
+#Initialize camera
+camera = Picamera2()
+video_config = camera.create_video_configuration({"size": (640, 360)}, controls={"FrameDurationLimits": (33333, 33333)})
+camera.configure(video_config)
+encoder = H264Encoder()
+
+#Create filename
 now = datetime.now()
-filename = 'films/%s,%s.h264' % (subject, now.strftime('%Y-%m-%d,%H-%M-%S'))
+filename = expanduser('~') + "/recordings/%s,%s.h264" % (subject, now.strftime("%Y-%m-%d,%H-%M-%S"))
 
-camera.resolution = (640, 360)
-camera.framerate = 30
-
+#Confirmation to start
 while(1):
     go = input("Start? (Y/n)\n")
     if go == "n" or go == "N":
@@ -23,6 +37,7 @@ while(1):
     else:
         print("Please enter \"y\", \"n\" or nothing")
 
-camera.start_recording(filename)
-camera.wait_recording(record_time)
+#Recording
+camera.start_recording(encoder, filename)
+sleep(record_time)
 camera.stop_recording()
