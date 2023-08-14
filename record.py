@@ -11,8 +11,9 @@ parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument("-t", "--time", default=7500, type=int, help="Duration (seconds) of recording")
 args = vars(parser.parse_args())
 
-#Set parameters
+#Set and display parameters
 record_time = args["time"]
+print("Record for", record_time, "seconds")
 
 #Get subject ID
 subject = input("Subject: ")
