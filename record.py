@@ -21,7 +21,7 @@ subject = input("Subject: ")
 
 #Initialize camera
 camera = Picamera2()
-video_config = camera.create_video_configuration({"size": (640, 360)}, controls={"FrameDurationLimits": (33333, 33333)})
+video_config = camera.create_video_configuration({"size": (640, 360)}, controls={"FrameDurationLimits": (40000, 40000)})
 camera.configure(video_config)
 encoder = H264Encoder()
 
