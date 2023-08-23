@@ -1,6 +1,7 @@
 from sys import argv
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from picamera2.encoders import H264Encoder
+from picamera2.outputs import FfmpegOutput
 from picamera2 import Picamera2
 from time import sleep
 from datetime import datetime
@@ -26,7 +27,8 @@ encoder = H264Encoder()
 
 #Create filename
 now = datetime.now()
-filename = expanduser('~') + "/recordings/%s,%s.h264" % (subject, now.strftime("%Y-%m-%d,%H-%M-%S"))
+filename = expanduser('~') + "/recordings/%s,%s.mp4" % (subject, now.strftime("%Y-%m-%d,%H-%M-%S"))
+output = FfmpegOutput(filename)
 
 #Confirmation to start
 while(1):
@@ -39,6 +41,6 @@ while(1):
         print("Please enter \"y\", \"n\" or nothing")
 
 #Recording
-camera.start_recording(encoder, filename)
+camera.start_recording(encoder, output)
 sleep(record_time)
 camera.stop_recording()
