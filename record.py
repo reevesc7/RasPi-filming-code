@@ -23,7 +23,7 @@ subject = input("Subject: ")
 camera = Picamera2()
 video_config = camera.create_video_configuration({"size": (640, 360)}, controls={"FrameDurationLimits": (40000, 40000)})
 camera.configure(video_config)
-encoder = H264Encoder()
+encoder = H264Encoder(10000000)
 
 #Create filename
 now = datetime.now()
