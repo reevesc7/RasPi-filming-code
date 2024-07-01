@@ -44,3 +44,4 @@ while(1):
 camera.start_recording(encoder, output)
 sleep(record_time)
 camera.stop_recording()
+print("\nRecording Complete")
